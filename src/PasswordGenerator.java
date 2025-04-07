@@ -1,7 +1,7 @@
 import java.security.SecureRandom;		// Generation of random numbers
 import java.util.Scanner;				// Read user input from console
 
-public class main {
+public class PasswordGenerator {
 
 	public static void main(String[] args) {
 		
@@ -80,9 +80,6 @@ public class main {
 		
 		// Initialize an object of type "SecureRandom"
 		SecureRandom secureRandom = new SecureRandom();
-				
-		// Create a random integer in [0; 9]
-		int randomInt = secureRandom.nextInt(10);
 		
 		// Initialize a string using StringBuilder
 		// This will be the password later
