@@ -1,5 +1,5 @@
-import java.security.SecureRandom;
-import java.util.Scanner;
+import java.security.SecureRandom;		// Generation of random numbers
+import java.util.Scanner;				// Read user input from console
 
 public class main {
 
@@ -8,7 +8,7 @@ public class main {
 		// Initialize a scanner object for user input
 		Scanner scanner = new Scanner(System.in);
 		
-		// Ask for the desired length of the password
+		// Ask user for the desired length of the password
 		System.out.println("Please enter the desired password length:");
 		int pwLength = scanner.nextInt();
 		
@@ -23,8 +23,8 @@ public class main {
 		
 		// Close the scanner
 		scanner.close();
-		
 	}
+	
 	
 	private static String CharacterSetSelection() {
 		
@@ -32,48 +32,47 @@ public class main {
 		Scanner scanner = new Scanner(System.in);
 		
 		// Initialize the character sets
-		final String ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		final String abc = "abcdefghijklmnopqrstuvwxyz";
-		final String digits = "0123456789";
-		final String specialChars = "-_ .,:;!\"§$%&/()=?";
+		final String[] characterSets = {
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ", // Uppercase letters
+			"abcdefghijklmnopqrstuvwxyz", // Lowercase letters
+			"0123456789", // Digits
+			"-", // Minus
+			"_", // Underline
+			" ", // Blank
+			"!\"§$%&/=?#'´`+*~|°^", // Special Characters
+			"()[]{}<>" // Brackets
+		};
+		
+		String Ask = "Do you want to use ";		// Just for abbreviation
+		
+		final String[] questions = {
+			Ask + "upper case letters? (Yes/No)",
+			Ask + "lower case letters? (Yes/No)",
+			Ask + "Digits? (Yes/No)",
+			Ask + "minus? (Yes/No)",
+			Ask + "underline? (Yes/No)",
+			Ask + "blank? (Yes/No)",
+			Ask + "special characters? (Yes/No)",
+			Ask + "brackets? (Yes/No)"
+		};
 		
 		// Initialize allowed Characters
 		StringBuilder Characters = new StringBuilder();
 		
-		// Asking for allowed character sets
-		System.out.println("Do you want to use upper case letters? (Yes/No)");
-		String useUppercase = scanner.nextLine().toLowerCase();
-		if (useUppercase.contains("y")) {
-			Characters.append(ABC);
+		// Ask the user for each set if it should be used
+		for (int i = 0; i < characterSets.length; i++) {
+			System.out.println(questions[i]);
+			String answer = scanner.nextLine().toLowerCase();
+			if (answer.contains("y")) {
+				Characters.append(characterSets[i]);
+			}
 		}
-		
-		System.out.println("Do you want to use lower case letters? (Yes/No)");
-		String useLowercase = scanner.nextLine().toLowerCase();
-		if (useLowercase.contains("y")) {
-			Characters.append(abc);
-		}
-		
-		System.out.println("Do you want to use digits? (Yes/No)");
-		String useDigits = scanner.nextLine().toLowerCase();
-		if (useDigits.contains("y")) {
-			Characters.append(digits);
-		}
-		
-		System.out.println("Do you want to use digits? (Yes/No)");
-		String useSpecialchars = scanner.nextLine().toLowerCase();
-		if (useSpecialchars.contains("y")) {
-			Characters.append(specialChars);
-		}
-		
-		
-		// Convert Characters to a string
-		String AllowedChars = Characters.toString();
 		
 		// Close the scanner
 		scanner.close();
-
-		// Return the allowed characters as output
-		return AllowedChars;
+		
+		// Return the allowed characters as string output
+		return Characters.toString();
 	}
 	
 	
@@ -103,5 +102,4 @@ public class main {
 		// Return the password as output
 		return password;
 	}
-
 }
