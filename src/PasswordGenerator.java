@@ -85,7 +85,7 @@ public class PasswordGenerator {
 	    
 	    
 		// Configure submit-button action
-		submitButton.addActionListener(e -> {
+		submitButton.addActionListener(_ -> {
 			// Obtain desired number of characters
 			String input = pwLengthField.getText().trim();
 			int pwLength;
@@ -135,7 +135,7 @@ public class PasswordGenerator {
 		
 		
 		// Implement "copy to clipboard" button
-		copyButton.addActionListener(evt -> {
+		copyButton.addActionListener(_ -> {
 		    String pw = passwordBox.getText();
 		    if (pw.isEmpty()) {
 		        JOptionPane.showMessageDialog(frame, "No password to copy.");
