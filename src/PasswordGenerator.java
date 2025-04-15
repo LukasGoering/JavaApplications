@@ -19,13 +19,26 @@ public class PasswordGenerator {
 		JFrame frame = new JFrame("Passworffcd Generator");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600, 400);
-		frame.setLayout(new GridLayout(5, 1)); // 5 rows, 1 column
+
+		// Main panel with vertical layout
+	    JPanel mainPanel = new JPanel();
+	    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+	    mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Padding
 		
-		// Create number-field for length of password
-		JTextField numberField = new JTextField();
+	    
+		// Input: Password length
+	    JPanel pwLengthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+	    pwLengthPanel.add(new JLabel("Password length:"));
+		JTextField pwLengthField = new JTextField(5);
+		pwLengthPanel.add(pwLengthField);
+		mainPanel.add(pwLengthPanel);
+		
 		
 		// Checkboxes for character sets
 		// ATTENTION: Order must match the order of characterSets
+		JPanel checkBoxPanel = new JPanel(new GridLayout(4, 2, 5, 5));
+		checkBoxPanel.setBorder(BorderFactory.createTitledBorder("Character Sets"));
+		
 		JCheckBox checkBox1 = new JCheckBox("Upper case letters");
 		JCheckBox checkBox2 = new JCheckBox("Lower case letters");
 		JCheckBox checkBox3 = new JCheckBox("Digits");
@@ -35,34 +48,61 @@ public class PasswordGenerator {
 		JCheckBox checkBox7 = new JCheckBox("Special Characters");
 		JCheckBox checkBox8 = new JCheckBox("Brackets");
 		
+		checkBoxPanel.add(checkBox1);
+	    checkBoxPanel.add(checkBox2);
+	    checkBoxPanel.add(checkBox3);
+	    checkBoxPanel.add(checkBox4);
+	    checkBoxPanel.add(checkBox5);
+	    checkBoxPanel.add(checkBox6);
+	    checkBoxPanel.add(checkBox7);
+	    checkBoxPanel.add(checkBox8);
+	    mainPanel.add(checkBoxPanel);
+		
 		// Create submit button
-		JButton submitButton = new JButton("Generate Password");
+	    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	    JButton submitButton = new JButton("Generate Password");
+	    buttonPanel.add(submitButton);
+	    mainPanel.add(buttonPanel);
 		
 		// Create output field
-		JTextArea passwordBox = new JTextArea();
-		passwordBox.setEditable(false); // The user can't type into it
-		passwordBox.setLineWrap(true);	// Allows multiple lines
-		passwordBox.setBorder(BorderFactory.createTitledBorder("Generated Password"));	// Creates frame with title
-		passwordBox.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
-        
-        // Add components to the frame
-		frame.add(new JLabel("Password length"));
-		frame.add(numberField);	
-		frame.add(checkBox1);
-		frame.add(checkBox2);
-		frame.add(checkBox3);
-		frame.add(checkBox4);
-		frame.add(checkBox5);
-		frame.add(checkBox6);
-		frame.add(checkBox7);
-		frame.add(checkBox8);
-		frame.add(passwordBox);
-		frame.add(submitButton);
+	    JTextArea passwordBox = new JTextArea(2, 30);
+	    passwordBox.setEditable(false);
+	    passwordBox.setLineWrap(true);
+	    passwordBox.setWrapStyleWord(true);
+	    passwordBox.setBorder(BorderFactory.createTitledBorder("Generated Password"));
+	    JScrollPane scrollPane = new JScrollPane(passwordBox);
+	    mainPanel.add(scrollPane);
+
+	    // Add main panel to frame
+	    frame.add(mainPanel);
+	    //// Optional: Dark Theme
+	    UIManager.put("Panel.background", new Color(45, 45, 45));
+	    UIManager.put("Label.foreground", Color.WHITE);
+	    UIManager.put("TextField.background", new Color(60, 60, 60));
+	    UIManager.put("TextField.foreground", Color.WHITE);
+	    UIManager.put("TextField.caretForeground", Color.WHITE);
+	    UIManager.put("TextField.border", BorderFactory.createLineBorder(new Color(100, 100, 100)));
+	    UIManager.put("TextArea.background", new Color(60, 60, 60));
+	    UIManager.put("TextArea.foreground", Color.WHITE);
+	    UIManager.put("TextArea.caretForeground", Color.WHITE);
+	    UIManager.put("Button.background", new Color(70, 70, 70));
+	    UIManager.put("Button.foreground", Color.WHITE);
+	    UIManager.put("CheckBox.background", new Color(45, 45, 45));
+	    UIManager.put("CheckBox.foreground", Color.WHITE);
+	    UIManager.put("TitledBorder.titleColor", Color.LIGHT_GRAY);
+	    UIManager.put("ScrollPane.background", new Color(45, 45, 45));
+	    UIManager.put("OptionPane.messageForeground", Color.WHITE);
+	    UIManager.put("OptionPane.background", new Color(45, 45, 45));
+	    UIManager.put("OptionPane.messageBackground", new Color(45, 45, 45));
+	    SwingUtilities.updateComponentTreeUI(frame); // Update Colors
+	    //// End Dark Mode
+	    
+	    frame.setVisible(true);
 		
 		// Configure button action
 		submitButton.addActionListener(e -> {
 			// Obtain desired number of characters
-			String input = numberField.getText().trim();
+			String input = pwLengthField.getText().trim();
 			int pwLength;
 			
 			try {
