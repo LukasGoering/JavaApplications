@@ -31,6 +31,7 @@ public class PasswordGenerator {
 		frame.add(gui.mainPanel);						// Add main panel to frame
 		SwingUtilities.updateComponentTreeUI(frame);	// Update necessary for dark theme
 		frame.setVisible(true);							// Show the GUI to the user
+		frame.setLocationRelativeTo(null);				// Center frame on screen
 		
 		
 		// Configure actions of the buttons
